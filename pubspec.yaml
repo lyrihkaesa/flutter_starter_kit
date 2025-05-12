@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_dotenv: ^5.2.1
   logger: ^2.5.0
+  go_router: ^15.1.2
 
 dev_dependencies:
   flutter_test:
