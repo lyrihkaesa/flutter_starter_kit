@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter_kit/app.dart';
 
-void main() {
+import 'app.dart';
+import 'core/app_config.dart';
+
+void main() async {
+  // Load config file before running the application
+  await MyAppConfig.load();
+
   runApp(const MyApp());
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter_kit/presentation/pages/home_page.dart';
+import 'core/app_config.dart';
+
+import 'presentation/pages/home_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: MyAppConfig.appName,
       theme: ThemeData(
         // This is the theme of your application.
         //
