@@ -49,3 +49,7 @@ app.*.map.json
 
 # Ignore .env
 .env
+
+# build_runner generated files
+*.freezed.dart
+*.g.dart
