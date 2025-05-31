@@ -7,6 +7,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isLoading = false;
+    final isVisible = true;
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 48.0),
@@ -25,6 +26,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 32),
               TextFormField(
                 decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.mail_outline_rounded, color: Colors.grey),
                   labelText: 'Email',
                   border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
                 ),
@@ -38,7 +40,14 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 16),
               TextFormField(
                 obscureText: true,
-                decoration: const InputDecoration(labelText: 'Password'),
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  prefixIcon: Icon(Icons.lock_outline_rounded, color: Colors.grey),
+                  suffixIcon:
+                      isVisible
+                          ? Icon(Icons.visibility_outlined, color: Colors.grey)
+                          : Icon(Icons.visibility_off_outlined, color: Colors.grey),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Password harus diisi';
@@ -54,6 +63,20 @@ class LoginPage extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50)),
                 child: isLoading ? const CircularProgressIndicator(strokeAlign: -2) : const Text('Login'),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Don\'t have an account?'),
+                  TextButton(
+                    onPressed: () {
+                      // Navigasi ke halaman register
+                      context.go('/register');
+                    },
+                    child: const Text('Sign Up'),
+                  ),
+                ],
               ),
             ],
           ),
