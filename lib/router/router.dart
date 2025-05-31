@@ -1,3 +1,4 @@
+import 'package:flutter_starter_kit/presentation/pages/auth/register_page.dart';
 import 'package:go_router/go_router.dart';
 
 import '../presentation/pages/auth/login_page.dart';
@@ -11,6 +12,11 @@ final goRouter = GoRouter(
   initialLocation: AppRouter.login.path,
   routes: [
     GoRoute(path: AppRouter.login.path, name: AppRouter.login.name, builder: (context, state) => const LoginPage()),
+    GoRoute(
+      path: AppRouter.register.path,
+      name: AppRouter.register.name,
+      builder: (context, state) => const RegisterPage(),
+    ),
     GoRoute(path: AppRouter.home.path, name: AppRouter.home.name, builder: (context, state) => const HomePage()),
     GoRoute(
       path: AppRouter.notFound.path,

@@ -4,6 +4,8 @@ class AppRouter {
   // Auth Routes
   static const login = RouteItem(name: 'login', path: '/login');
 
+  static const register = RouteItem(name: 'register', path: '/register');
+
   static const home = RouteItem(name: 'home', path: '/home');
 
   // Not Found Route
