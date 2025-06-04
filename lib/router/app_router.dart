@@ -6,6 +6,8 @@ class AppRouter {
 
   static const register = RouteItem(name: 'register', path: '/register');
 
+  static const profile = RouteItem(name: 'profile', path: '/profile');
+
   static const home = RouteItem(name: 'home', path: '/home');
 
   // Not Found Route
