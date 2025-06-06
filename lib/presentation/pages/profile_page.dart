@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_starter_kit/presentation/pages/components/custom_avatar.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -20,7 +21,12 @@ class ProfilePage extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  ClipOval(child: Image.asset('assets/images/logo.png', height: 100, width: 100, fit: BoxFit.cover)),
+                  CustomAvatar(
+                    size: 100,
+                    username: 'Kaesa Lyrih',
+                    imageUrl:
+                        'https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg',
+                  ),
                   const SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
