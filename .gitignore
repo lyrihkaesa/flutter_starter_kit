@@ -53,3 +53,5 @@ app.*.map.json
 # build_runner generated files
 *.freezed.dart
 *.g.dart
+.mason/bricks.json
+.vscode/settings.json
