@@ -20,7 +20,7 @@ void run(HookContext context) {
   buffer.writeln("sealed class $pascal with _\$$pascal {");
   buffer.writeln("  const factory $pascal({");
   for (final field in fields) {
-    buffer.writeln("    ${field['requiredKeyword']}${field['fieldType']} ${field['fieldName']},");
+    buffer.writeln("    ${field['requiredKeyword']}${field['fieldType']} ${_camelCase(field['fieldName'])},");
   }
   buffer.writeln("  }) = _${pascal};");
   buffer.writeln();
@@ -40,3 +40,8 @@ String _snakeCase(String input) =>
     input.replaceAllMapped(RegExp(r'([a-z0-9])([A-Z])'), (m) => '${m[1]}_${m[2]}').toLowerCase();
 
 String _pascalCase(String input) => input.substring(0, 1).toUpperCase() + input.substring(1);
+
+String _camelCase(String input) {
+  final parts = input.split(RegExp(r'[_\s]+'));
+  return parts.first.toLowerCase() + parts.skip(1).map((w) => w[0].toUpperCase() + w.substring(1)).join();
+}
