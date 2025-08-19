@@ -1,12 +1,12 @@
 bricks:
-  remote_data_source:
+  remote_datasource:
     git:
       url: "https://github.com/lyrihkaesa/bricks_flutter_starter_kit.git"
-      path: bricks/remote_data_source
-  local_data_source:
+      path: bricks/remote_datasource
+  local_datasource:
     git:
       url: "https://github.com/lyrihkaesa/bricks_flutter_starter_kit.git"
-      path: bricks/local_data_source
+      path: bricks/local_datasource
   model:
     git:
       url: "https://github.com/lyrihkaesa/bricks_flutter_starter_kit.git"
