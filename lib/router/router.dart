@@ -1,5 +1,5 @@
-import 'package:flutter_starter_kit/presentation/pages/auth/register_page.dart';
-import 'package:flutter_starter_kit/presentation/pages/profile_page.dart';
+import '../presentation/pages/auth/register_page.dart';
+import '../presentation/pages/profile_page.dart';
 import 'package:go_router/go_router.dart';
 
 import '../presentation/pages/auth/login_page.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter_kit/presentation/pages/components/custom_avatar.dart';
+import 'components/custom_avatar.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -28,15 +28,17 @@ class ProfilePage extends StatelessWidget {
                         'https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg',
                   ),
                   const SizedBox(width: 16),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Kaesa Lyrih',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      Text('Admin • Charapon • Programmer', style: Theme.of(context).textTheme.titleMedium),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Kaesa Lyrih',
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        Text('Admin • Charapon • Programmer', style: Theme.of(context).textTheme.titleMedium),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -70,13 +72,12 @@ class ProfileListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(title, style: Theme.of(context).textTheme.titleSmall),
-      subtitle:
-          subtitle != null
-              ? Text(
-                subtitle!,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: const Color.fromARGB(175, 0, 0, 0)),
-              )
-              : null,
+      subtitle: subtitle != null
+          ? Text(
+              subtitle!,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(color: const Color.fromARGB(175, 0, 0, 0)),
+            )
+          : null,
       trailing: Icon(Icons.chevron_right_rounded),
       onTap: onTap,
       shape: Border(top: BorderSide(color: const Color.fromARGB(50, 0, 0, 0), width: 0.5)),

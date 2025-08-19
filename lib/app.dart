@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter_kit/core/themes/input_decoration_theme.dart';
+import 'core/themes/input_decoration_theme.dart';
 
 import 'core/app_config.dart';
 import 'router/router.dart';
