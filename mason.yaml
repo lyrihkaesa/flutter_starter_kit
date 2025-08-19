@@ -1,9 +1,25 @@
 bricks:
   remote_data_source:
-    path: "bricks\\remote_data_source"
+    git:
+      url: "https://github.com/lyrihkaesa/bricks_flutter_starter_kit.git"
+      path: bricks/remote_data_source
   local_data_source:
-    path: "bricks\\local_data_source"
+    git:
+      url: "https://github.com/lyrihkaesa/bricks_flutter_starter_kit.git"
+      path: bricks/local_data_source
   model:
-    path: "bricks\\model"
+    git:
+      url: "https://github.com/lyrihkaesa/bricks_flutter_starter_kit.git"
+      path: bricks/model
   entity:
-    path: "bricks\\entity"
+    git:
+      url: "https://github.com/lyrihkaesa/bricks_flutter_starter_kit.git"
+      path: bricks/entity
+  repository:
+    git:
+      url: "https://github.com/lyrihkaesa/bricks_flutter_starter_kit.git"
+      path: bricks/repository
+  usecase:
+    git:
+      url: "https://github.com/lyrihkaesa/bricks_flutter_starter_kit.git"
+      path: bricks/usecase
