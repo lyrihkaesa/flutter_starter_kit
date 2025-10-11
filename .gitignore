@@ -55,3 +55,4 @@ app.*.map.json
 *.g.dart
 .mason/bricks.json
 .vscode/settings.json
+lib/injection.config.dart

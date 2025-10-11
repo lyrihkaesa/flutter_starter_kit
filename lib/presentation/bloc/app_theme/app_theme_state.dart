@@ -9,6 +9,6 @@ sealed class AppThemeState with _$AppThemeState {
 
   factory AppThemeState.initial() => const AppThemeState(
         message: null,
-        themeMode: ThemeMode.light,
+        themeMode: ThemeMode.system,
   );
 }
