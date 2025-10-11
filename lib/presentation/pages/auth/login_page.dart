@@ -43,10 +43,9 @@ class LoginPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: 'Password',
                   prefixIcon: Icon(Icons.lock_outline_rounded, color: Colors.grey),
-                  suffixIcon:
-                      isVisible
-                          ? Icon(Icons.visibility_outlined, color: Colors.grey)
-                          : Icon(Icons.visibility_off_outlined, color: Colors.grey),
+                  suffixIcon: isVisible
+                      ? Icon(Icons.visibility_outlined, color: Colors.grey)
+                      : Icon(Icons.visibility_off_outlined, color: Colors.grey),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {

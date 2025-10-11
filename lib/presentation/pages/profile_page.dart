@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'components/custom_avatar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/app_theme/app_theme_bloc.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -49,6 +51,20 @@ class ProfilePage extends StatelessWidget {
                   'Pengaturan',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(color: const Color.fromARGB(175, 0, 0, 0)),
                 ),
+              ),
+              // Dark mode toggle
+              BlocBuilder<AppThemeBloc, AppThemeState>(
+                builder: (context, state) {
+                  final isDark = state.themeMode == ThemeMode.dark;
+                  return ListTile(
+                    title: Text('Mode Gelap', style: Theme.of(context).textTheme.titleSmall),
+                    trailing: Switch(
+                      value: isDark,
+                      onChanged: (_) => context.read<AppThemeBloc>().add(const AppThemeEvent.toggled()),
+                    ),
+                    shape: const Border(top: BorderSide(color: Color.fromARGB(50, 0, 0, 0), width: 0.5)),
+                  );
+                },
               ),
               ProfileListItem(title: 'Ubah Password', onTap: () {}),
               ProfileListItem(title: 'Bahasa / Language', subtitle: 'Indonesia', onTap: () {}),
