@@ -77,3 +77,16 @@ flutter run
 - Gunakan perintah `flutter` biasa setelah `fvm use` (bukan `fvm flutter`) agar konsisten dengan SDK project.
 - Gunakan `flutter pub run build_runner watch --delete-conflicting-outputs` saat development untuk regenerasi otomatis Freezed.
 - Gunakan `mason make <brick_name>` untuk membuat template dari bricks yang sudah tersedia.
+
+---
+
+## 🤖 AI Agent Ready
+
+Starter Kit ini sudah dilengkapi dengan **AI Agent Configuration** built-in di lokasi [.agents/](file://.agents) dan [AGENTS.md](file://AGENTS.md). 
+
+Jika Anda menggunakan AI Pair Programmer (seperti Google Antigravity, Gemini CLI, Cursor, dll.), AI akan secara otomatis:
+- Mengetahui standar **Clean Architecture** proyek (`Presentation`, `Domain`, `Data`, `Core`).
+- Mengikuti aturan immutability BLoC/Cubit dengan `freezed`.
+- Mengetahui kapan harus meng-generate kode dengan `build_runner`.
+- Membuat unit test yang konsisten dengan standar mocking proyek.
+
