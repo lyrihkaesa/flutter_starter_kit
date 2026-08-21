@@ -4,38 +4,34 @@ Flutter Starter Kit berbasis **Clean Architecture** (Presentation, Domain, Data,
 
 ---
 
-## ⚡ Panduan Cepat: Men-generate Aplikasi Baru + AI Rules
+## ⚡ Panduan Cepat: Global CLI Command (`flutter_starter`)
 
-Cukup clone repositori ini dan jalankan **1 perintah** (tanpa perlu meng-install tool/package tambahan):
+Pengguna **tidak perlu meng-clone repositori ini secara manual**. Cukup aktifkan perintah global `flutter_starter` sekali di terminal:
 
 ```bash
-# 1. Clone & masuk ke repo starter kit
-git clone https://github.com/lyrihkaesa/flutter_starter_kit.git
-cd flutter_starter_kit
+# 1. Install CLI secara global (Cukup sekali dari terminal mana saja):
+dart pub global activate --source git https://github.com/lyrihkaesa/flutter_starter_kit.git
 
-# 2. Run generator project baru
-dart run tool/create_project.dart my_awesome_app --org com.mycompany
+# 2. Generate project Flutter baru dari lokasi folder mana saja:
+flutter_starter my_awesome_app --org com.mycompany
 ```
 
-### 📍 Lokasi Hasil Generate
-Secara default, project baru akan dibuat **sejajar di luar folder starter kit** (`../<nama_project>`):
-```
-📁 Development/Flutter/
-├── 📁 flutter_starter_kit/   <-- Repo Starter Kit (asal)
-└── 📁 my_awesome_app/        <-- Project Baru (hasil generate) ✨
-```
-
-*Atau tentukan lokasi khusus via flag `--output`:*
+### 📍 Opsi Tambahan:
 ```bash
-dart run tool/create_project.dart my_awesome_app --org com.mycompany --output /path/tujuan/my_awesome_app
+# Menentukan folder output spesifik
+flutter_starter my_awesome_app --org com.mycompany --output /path/tujuan/my_awesome_app
+
+# Langsung menjalankan build_runner secara otomatis setelah generate
+flutter_starter my_awesome_app --org com.mycompany --build-runner
 ```
 
 ### 🚀 Langkah Selanjutnya:
 ```bash
-cd ../my_awesome_app
+cd my_awesome_app
 dart run build_runner build --delete-conflicting-outputs
 flutter run
 ```
+
 
 
 ---
