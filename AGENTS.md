@@ -5,10 +5,13 @@ Proyek ini telah dikonfigurasi agar ramah terhadap **AI Coding Assistant** (sepe
 ## 📌 Ringkasan Aturan Proyek
 
 1. **Clean Architecture (4 Layers)**:
-   - `Presentation` (`lib/presentation/`): UI & BLoC/Cubit. State WAJIB `@freezed`.
-   - `Domain` (`lib/domain/`): Pure Dart rules. Mengembalikan `Either<Failure, T>`. Tanpa import UI / Data package.
-   - `Data` (`lib/data/`): Models DTO, DataSources (Dio/SharedPreferences), dan `RepositoryImpl`.
    - `Core` (`lib/core/`): Global utils, errors, constants, dan theme.
+   - `Data` (`lib/data/`): Models DTO terklasifikasi (`requests/`, `responses/`), DataSources terklasifikasi (`local/`, `remote/`), dan `RepositoryImpl`.
+
+   - `Domain` (`lib/domain/`): Pure Dart rules. Entities terklasifikasi (`requests/`, `responses/`, `commons/`). Mengembalikan `Either<Failure, T>`. `usecases/` dibagi per `<feature>/`.
+
+   - `Presentation` (`lib/presentation/`): `pages/` & `bloc/` dibagi per `<feature>/`. Setiap `<feature>/` page memiliki `widgets/`, `utils/`, dan `<feature>.dart` sebagai main UI. State WAJIB `@freezed`.
+
 
 2. **Dependency Injection & Generation**:
    - Gunakan anotasi `@injectable` / `@lazySingleton`.
