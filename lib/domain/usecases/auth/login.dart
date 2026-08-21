@@ -2,7 +2,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/errors/failure.dart';
-import '../../entities/user.dart';
+import '../../entities/responses/user.dart';
+
 import '../../repositories/auth_repository.dart';
 
 @lazySingleton

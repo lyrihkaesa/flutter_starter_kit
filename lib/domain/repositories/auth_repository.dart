@@ -1,7 +1,8 @@
 import 'package:fpdart/fpdart.dart';
 
 import '../../core/errors/failure.dart';
-import '../entities/user.dart';
+import '../entities/responses/user.dart';
+
 
 abstract class AuthRepository {
   Future<Either<Failure, User>> login({

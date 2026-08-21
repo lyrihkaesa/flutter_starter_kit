@@ -3,7 +3,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../core/errors/exception.dart';
 import '../../core/errors/failure.dart';
-import '../../domain/entities/user.dart';
+import '../../domain/entities/responses/user.dart';
+
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/local/auth_local_datasource.dart';
 import '../datasources/remote/auth_remote_datasource.dart';

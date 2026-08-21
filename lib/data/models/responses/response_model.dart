@@ -1,4 +1,5 @@
-import '../../domain/entities/response.dart';
+import '../../../domain/entities/responses/response.dart';
+
 
 class ResponseModel<T> {
   final String? message;

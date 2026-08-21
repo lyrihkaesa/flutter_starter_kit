@@ -1,11 +1,11 @@
-import '../presentation/pages/auth/register_page.dart';
-import '../presentation/pages/profile_page.dart';
 import 'package:go_router/go_router.dart';
 
-import '../presentation/pages/auth/login_page.dart';
-import '../presentation/pages/errors/not_found_page.dart';
-import '../presentation/pages/home_page.dart';
+import '../presentation/pages/auth/auth.dart';
+import '../presentation/pages/home/home.dart';
+import '../presentation/pages/not_found/not_found.dart';
+import '../presentation/pages/profile/profile.dart';
 import 'router_item.dart';
+
 
 part 'app_router.dart';
 

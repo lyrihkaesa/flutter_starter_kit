@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../bloc/app_theme/app_theme_bloc.dart';
-import '../bloc/auth/auth_bloc.dart';
-import '../bloc/auth/auth_event.dart';
-import '../bloc/auth/auth_state.dart';
-import 'components/custom_avatar.dart';
+import '../../bloc/app_theme/app_theme_bloc.dart';
+import '../../bloc/auth/auth_bloc.dart';
+import '../../bloc/auth/auth_event.dart';
+import '../../bloc/auth/auth_state.dart';
+import '../../widgets/custom_avatar.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -16,10 +16,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: const Icon(Icons.arrow_back_rounded),
-        ),
+        leading: IconButton(onPressed: () => context.pop(), icon: const Icon(Icons.arrow_back_rounded)),
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -30,9 +27,7 @@ class ProfilePage extends StatelessWidget {
           );
         },
         builder: (context, state) {
-          final user = state.whenOrNull(
-            authenticated: (user) => user,
-          );
+          final user = state.whenOrNull(authenticated: (user) => user);
 
           final username = user?.name ?? 'Pengguna';
           final email = user?.email ?? '-';
@@ -45,11 +40,7 @@ class ProfilePage extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    CustomAvatar(
-                      size: 80,
-                      username: username,
-                      imageUrl: avatarUrl,
-                    ),
+                    CustomAvatar(size: 80, username: username, imageUrl: avatarUrl),
                     const SizedBox(width: 16),
                     Expanded(
                       child: Column(
@@ -60,10 +51,7 @@ class ProfilePage extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 4),
-                          Text(
-                            email,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey),
-                          ),
+                          Text(email, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey)),
                         ],
                       ),
                     ),
@@ -113,12 +101,7 @@ class ProfileListItem extends StatelessWidget {
   final String? subtitle;
   final void Function()? onTap;
 
-  const ProfileListItem({
-    required this.title,
-    this.subtitle,
-    this.onTap,
-    super.key,
-  });
+  const ProfileListItem({required this.title, this.subtitle, this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {

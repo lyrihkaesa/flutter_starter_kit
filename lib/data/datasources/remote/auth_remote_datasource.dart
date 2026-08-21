@@ -2,8 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/errors/exception.dart';
-import '../../models/auth_response_model.dart';
-import '../../models/user_model.dart';
+import '../../models/responses/auth_response_model.dart';
+import '../../models/responses/user_model.dart';
+
 
 abstract class AuthRemoteDataSource {
   Future<AuthResponseModel> login({
