@@ -9,6 +9,11 @@ Future<void> run(HookContext context) async {
   final progress = logger.progress('Menjalankan flutter create...');
 
   try {
+    final targetDir = Directory(projectName);
+    if (!targetDir.existsSync()) {
+      await targetDir.create(recursive: true);
+    }
+
     final result = await Process.run(
       'flutter',
       [
@@ -20,7 +25,7 @@ Future<void> run(HookContext context) async {
         orgName,
         '--overwrite',
       ],
-      workingDirectory: Directory.current.path,
+      workingDirectory: targetDir.path,
     );
 
     if (result.exitCode == 0) {

@@ -25,56 +25,24 @@ mason add -g app_starter --git-url https://github.com/lyrihkaesa/flutter_starter
 
 ---
 
-### 🟢 Cara 1: Sekali Jalan via Mason (Otomatis Full App)
+### Langkah 3: Generate Aplikasi Baru
 
-Cukup jalankan 1 perintah berikut di direktori tempat Anda ingin membuat proyek baru. Mason akan otomatis membuat `android/`, `ios/`, `web/`, meng-install `pub`, dan men-generate kode Clean Architecture:
+Jalankan 1 perintah berikut di direktori tempat Anda ingin membuat proyek baru. Mason akan langsung membuat **1 folder pembungkus proyek Flutter bernama `camera_sppg/`** (terisi lengkap dengan `android/`, `ios/`, `web/`, `lib/`, `pubspec.yaml`, `.env`, dll.), meng-install dependencies, dan men-generate kode Clean Architecture secara otomatis:
 
-#### ⚡ Mode One-Liner CLI:
-* **Tanpa Modul Auth**:
-  ```bash
-  mason make app_starter --project_name camera_sppg --org_name com.example --description "Camera SPPG App" --include_auth false -o ./camera-sppg
-  ```
-
-* **Dengan Modul Auth** (Login, Register, AuthBloc):
-  ```bash
-  mason make app_starter --project_name camera_sppg --org_name com.example --description "Camera SPPG App" --include_auth true -o ./camera-sppg
-  ```
-
-#### 💬 Mode Interaktif (Tanya Jawab Terminal):
 ```bash
-mason make app_starter -o ./camera-sppg
+mason make app_starter --project_name camera_sppg --org_name com.example --description "Camera SPPG App" --include_auth false
 ```
 
-Setelah selesai, cukup masuk ke folder dan jalankan:
+> 💬 *Atau gunakan **Mode Interaktif** (Terminal akan menanyakan parameter satu per satu):*
+> ```bash
+> mason make app_starter
+> ```
+
+### Langkah 4: Jalankan Aplikasi
 ```bash
-cd camera-sppg
+cd camera_sppg
 flutter run
 ```
-
----
-
-### 🛠️ Cara 2: Manual (Flutter Create + Mason Fallback)
-
-Jika Anda ingin men-generate proyek Flutter native dasar terlebih dahulu kemudian menimpanya dengan Clean Architecture Starter Kit:
-
-1. **Buat Proyek Flutter Baru**:
-   ```bash
-   flutter create --org com.example --project-name camera_sppg camera-sppg
-   ```
-
-2. **Terapkan Clean Architecture Brick**:
-   ```bash
-   cd camera-sppg
-   mason make app_starter --on-conflict overwrite
-   ```
-
-3. **Setup Environment & Build Code**:
-   ```bash
-   cp .env.example .env
-   flutter pub get
-   flutter pub run build_runner build --delete-conflicting-outputs
-   flutter run
-   ```
 
 ---
 
