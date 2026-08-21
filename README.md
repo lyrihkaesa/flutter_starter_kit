@@ -6,46 +6,75 @@ Flutter Starter Kit berbasis **Clean Architecture** (Presentation, Domain, Data,
 
 ## ⚡ Panduan Cepat: Men-generate Aplikasi Baru via CLI
 
-Anda dapat men-generate proyek Flutter Clean Architecture baru langsung dari terminal tanpa harus meng-clone repository ini secara manual.
+Anda dapat men-generate proyek Flutter Clean Architecture baru langsung dari terminal dari folder mana saja dari nol sampai siap jalan.
 
 ### Langkah 1: Install Mason CLI (Cukup Sekali)
 ```bash
 dart pub global activate mason_cli
 ```
 
-### Langkah 2: Tambahkan Brick `app_starter` ke Mason Global
+### Langkah 2: Registrasi Brick `app_starter` ke Global Mason
 ```bash
 mason add -g app_starter --git-url https://github.com/lyrihkaesa/flutter_starter_kit.git --git-path bricks/app_starter
 ```
+> *Jika sudah pernah meng-install versi lama, perbarui dengan:*
+> ```bash
+> mason remove -g app_starter
+> mason add -g app_starter --git-url https://github.com/lyrihkaesa/flutter_starter_kit.git --git-path bricks/app_starter
+> ```
 
-### Langkah 3: Generate Aplikasi Baru
+---
 
-#### 🟢 Opsi A: Mode Interaktif (Tanya Jawab Terminal)
+### 🟢 Cara 1: Sekali Jalan via Mason (Otomatis Full App)
+
+Cukup jalankan 1 perintah berikut di direktori tempat Anda ingin membuat proyek baru. Mason akan otomatis membuat `android/`, `ios/`, `web/`, meng-install `pub`, dan men-generate kode Clean Architecture:
+
+#### ⚡ Mode One-Liner CLI:
+* **Tanpa Modul Auth**:
+  ```bash
+  mason make app_starter --project_name camera_sppg --org_name com.example --description "Camera SPPG App" --include_auth false -o ./camera-sppg
+  ```
+
+* **Dengan Modul Auth** (Login, Register, AuthBloc):
+  ```bash
+  mason make app_starter --project_name camera_sppg --org_name com.example --description "Camera SPPG App" --include_auth true -o ./camera-sppg
+  ```
+
+#### 💬 Mode Interaktif (Tanya Jawab Terminal):
 ```bash
-mason make app_starter -g
+mason make app_starter -o ./camera-sppg
 ```
-*Mason akan menanyakan nama proyek, org name, deskripsi, serta konfirmasi apakah ingin menggunakan modul Auth (`y/n`).*
 
-#### ⚡ Opsi B: Mode One-Liner CLI
-
-* **Generate Aplikasi TANPA Auth** (Langsung ke halaman utama / fitur baru):
-  ```bash
-  mason make app_starter -g --project_name my_app --org_name com.example --include_auth false -o ./my_app
-  ```
-
-* **Generate Aplikasi DENGAN Auth** (Lengkap dengan Login, Register, AuthBloc):
-  ```bash
-  mason make app_starter -g --project_name my_app --org_name com.example --include_auth true -o ./my_app
-  ```
-
-### Langkah 4: Jalankan Aplikasi Baru
+Setelah selesai, cukup masuk ke folder dan jalankan:
 ```bash
-cd my_app
-cp .env.example .env
-flutter pub get
-flutter pub run build_runner build --delete-conflicting-outputs
+cd camera-sppg
 flutter run
 ```
+
+---
+
+### 🛠️ Cara 2: Manual (Flutter Create + Mason Fallback)
+
+Jika Anda ingin men-generate proyek Flutter native dasar terlebih dahulu kemudian menimpanya dengan Clean Architecture Starter Kit:
+
+1. **Buat Proyek Flutter Baru**:
+   ```bash
+   flutter create --org com.example --project-name camera_sppg camera-sppg
+   ```
+
+2. **Terapkan Clean Architecture Brick**:
+   ```bash
+   cd camera-sppg
+   mason make app_starter --on-conflict overwrite
+   ```
+
+3. **Setup Environment & Build Code**:
+   ```bash
+   cp .env.example .env
+   flutter pub get
+   flutter pub run build_runner build --delete-conflicting-outputs
+   flutter run
+   ```
 
 ---
 

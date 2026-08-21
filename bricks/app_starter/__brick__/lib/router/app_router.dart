@@ -1,13 +1,13 @@
 part of 'router.dart';
 
 class AppRouter {
-  {{#include_auth}}
   // Auth Routes
   static const login = RouteItem(name: 'login', path: '/login');
+
   static const register = RouteItem(name: 'register', path: '/register');
-  {{/include_auth}}
 
   static const profile = RouteItem(name: 'profile', path: '/profile');
+
   static const home = RouteItem(name: 'home', path: '/home');
 
   // Not Found Route
