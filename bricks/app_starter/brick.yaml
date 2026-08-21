@@ -1,0 +1,28 @@
+name: app_starter
+description: Starter Kit Flutter dengan Clean Architecture dan opsi modul Auth.
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.26 <0.2.0"
+
+vars:
+  project_name:
+    type: string
+    description: Nama proyek Flutter (snake_case)
+    default: my_app
+    prompt: Masukkan nama proyek?
+  org_name:
+    type: string
+    description: Package organization (misal com.example)
+    default: com.example
+    prompt: Masukkan org name?
+  description:
+    type: string
+    description: Deskripsi proyek
+    default: A new Flutter Clean Architecture project.
+    prompt: Deskripsi proyek?
+  include_auth:
+    type: boolean
+    description: Apakah ingin menyertakan modul Auth (Login, Register, AuthBloc)?
+    default: true
+    prompt: Sertakan modul Auth?

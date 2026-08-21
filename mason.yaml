@@ -27,3 +27,6 @@ bricks:
     git:
       url: "https://github.com/lyrihkaesa/bricks_flutter_starter_kit"
       path: bricks/bloc
+  app_starter:
+    path: bricks/app_starter
+
