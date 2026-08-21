@@ -4,86 +4,52 @@ Flutter Starter Kit berbasis **Clean Architecture** (Presentation, Domain, Data,
 
 ---
 
-## ⚡ Panduan Cepat: Men-generate Aplikasi Baru via CLI
+## ⚡ Panduan Cepat: Men-generate Aplikasi Baru + AI Rules
 
-Anda dapat men-generate proyek Flutter Clean Architecture baru langsung dari terminal dari folder mana saja dari nol sampai siap jalan.
+Cukup clone repositori ini dan jalankan **1 perintah** (tanpa perlu meng-install tool/package tambahan):
 
-### Langkah 1: Install Mason CLI (Cukup Sekali)
 ```bash
-dart pub global activate mason_cli
+# 1. Clone & masuk ke repo starter kit
+git clone https://github.com/lyrihkaesa/flutter_starter_kit.git
+cd flutter_starter_kit
+
+# 2. Run generator project baru
+dart run tool/create_project.dart my_awesome_app --org com.mycompany
 ```
 
-### Langkah 2: Registrasi Brick `app_starter` ke Global Mason
-```bash
-mason add -g app_starter --git-url https://github.com/lyrihkaesa/flutter_starter_kit.git --git-path bricks/app_starter
+### 📍 Lokasi Hasil Generate
+Secara default, project baru akan dibuat **sejajar di luar folder starter kit** (`../<nama_project>`):
 ```
-> *Jika sudah pernah meng-install versi lama, perbarui dengan:*
-> ```bash
-> mason remove -g app_starter
-> mason add -g app_starter --git-url https://github.com/lyrihkaesa/flutter_starter_kit.git --git-path bricks/app_starter
-> ```
-
----
-
-### Langkah 3: Generate Aplikasi Baru
-
-Jalankan 1 perintah berikut di direktori tempat Anda ingin membuat proyek baru. Mason akan langsung membuat **1 folder pembungkus proyek Flutter bernama `camera_sppg/`** (terisi lengkap dengan `android/`, `ios/`, `web/`, `lib/`, `pubspec.yaml`, `.env`, dll.), meng-install dependencies, dan men-generate kode Clean Architecture secara otomatis:
-
-```bash
-mason make app_starter --project_name camera_sppg --org_name com.example --description "Camera SPPG App" --include_auth false
+📁 Development/Flutter/
+├── 📁 flutter_starter_kit/   <-- Repo Starter Kit (asal)
+└── 📁 my_awesome_app/        <-- Project Baru (hasil generate) ✨
 ```
 
-> 💬 *Atau gunakan **Mode Interaktif** (Terminal akan menanyakan parameter satu per satu):*
-> ```bash
-> mason make app_starter
-> ```
-
-### Langkah 4: Jalankan Aplikasi
+*Atau tentukan lokasi khusus via flag `--output`:*
 ```bash
-cd camera_sppg
+dart run tool/create_project.dart my_awesome_app --org com.mycompany --output /path/tujuan/my_awesome_app
+```
+
+### 🚀 Langkah Selanjutnya:
+```bash
+cd ../my_awesome_app
+dart run build_runner build --delete-conflicting-outputs
 flutter run
 ```
 
+
 ---
 
-## 💻 Panduan Lokal: Clone & Development di Proyek Ini
+## 🧱 Mason Bricks untuk Component Generation
 
-Jika Anda ingin langsung menggunakan repository ini sebagai basis proyek:
+Gunakan Mason Bricks untuk men-generate komponen Clean Architecture (Feature Level) pada proyek:
 
-### 1. Clone & Setup Environment
 ```bash
-git clone https://github.com/lyrihkaesa/flutter_starter_kit.git
-cd flutter_starter_kit
-cp .env.example .env
-```
-
-### 2. Gunakan Flutter versi project (FVM)
-Pastikan sudah install [FVM](https://fvm.app/docs/getting_started/installation). Lalu jalankan:
-```bash
-fvm use
-```
-
-> ⚠️ **Windows user**:
-> - Restart VSCode setelah `fvm use`.
-> - Pastikan **Flutter SDK path** di VSCode diarahkan ke `.fvm/flutter_sdk`.
-> - Aktifkan "Development Mode" di Windows agar symlink FVM bekerja.
-
-### 3. Install Dependencies & Build Code
-```bash
-flutter pub get
-flutter pub run build_runner build --delete-conflicting-outputs
 mason get
 ```
 
----
-
-## 🧱 Daftar Mason Bricks yang Tersedia
-
-Repository ini menyediakan Mason Bricks untuk mempercepat pembuatan modul dan komponen Clean Architecture:
-
 | Nama Brick | Scope | Kegunaan |
 | :--- | :--- | :--- |
-| **`app_starter`** | Project | Men-generate fondasi proyek aplikasi baru (Opsional Auth via `--include_auth`) |
 | **`bloc`** | Component | Men-generate BLoC / Cubit berstandar `freezed` |
 | **`usecase`** | Component | Men-generate UseCase berstandar `fpdart` (`Either<Failure, T>`) |
 | **`repository`** | Component | Men-generate Repository Interface dan RepositoryImpl |
@@ -97,6 +63,7 @@ Repository ini menyediakan Mason Bricks untuk mempercepat pembuatan modul dan ko
 mason make bloc --name product
 mason make usecase --name get_products
 ```
+
 
 ---
 
