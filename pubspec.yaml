@@ -44,6 +44,7 @@ dependencies:
   injectable: ^2.5.1
   shared_preferences: ^2.5.3
   flutter_bloc: ^9.1.1
+  flutter_secure_storage: ^9.2.4
   provider: ^6.1.5+1
   fpdart: ^1.1.1
 

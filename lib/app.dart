@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
-import 'core/themes/app_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'injection.dart';
-import 'presentation/bloc/app_theme/app_theme_bloc.dart';
 
 import 'core/app_config.dart';
+import 'core/themes/app_theme.dart';
+import 'injection.dart';
+import 'presentation/bloc/app_theme/app_theme_bloc.dart';
+import 'presentation/bloc/auth/auth_bloc.dart';
+import 'presentation/bloc/auth/auth_event.dart';
 import 'router/router.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<AppThemeBloc>()..add(const AppThemeEvent.started()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<AppThemeBloc>()..add(const AppThemeEvent.started()),
+        ),
+        BlocProvider(
+          create: (context) => getIt<AuthBloc>()..add(const AuthEvent.checkRequested()),
+        ),
+      ],
       child: BlocBuilder<AppThemeBloc, AppThemeState>(
         builder: (context, state) {
           return MaterialApp.router(
@@ -22,9 +30,8 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.light,
             darkTheme: AppTheme.dark,
             themeMode: state.themeMode,
-            debugShowCheckedModeBanner: false, // default: true or other best partice: !kReleaseMode
+            debugShowCheckedModeBanner: false,
             routerConfig: goRouter,
-            // locale: const Locale('id', 'ID'),
           );
         },
       ),

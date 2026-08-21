@@ -16,5 +16,7 @@ sealed class Failure with _$Failure {
 
   const factory Failure.database({String? message}) = DatabaseFailure;
 
+  const factory Failure.cache({String? message}) = CacheFailure;
+
   const factory Failure.unknown({String? message}) = UnknownFailure;
 }

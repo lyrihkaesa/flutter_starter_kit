@@ -19,15 +19,14 @@ abstract class AppException implements Exception {
 
 /// Thrown when server returns 5xx or unexpected response
 class ServerException extends AppException {
-  const ServerException({String? message, String? error, String? errorDescription})
-    : super(message: message, error: error, errorDescription: errorDescription);
+  const ServerException({super.message, super.error, super.errorDescription});
 }
 
 /// Thrown when validation errors (Laravel style)
 class ValidationException extends AppException {
   final Map<String, List<String>> errors;
 
-  const ValidationException(this.errors, {String? message}) : super(message: message);
+  const ValidationException(this.errors, {super.message});
 
   @override
   String toString() => "ValidationException(errors=$errors, msg=$message)";
@@ -35,27 +34,30 @@ class ValidationException extends AppException {
 
 /// Thrown when unauthorized or invalid token (OAuth2/JWT)
 class UnauthorizedException extends AppException {
-  const UnauthorizedException({String? message, String? error, String? errorDescription})
-    : super(message: message, error: error, errorDescription: errorDescription);
+  const UnauthorizedException({super.message, super.error, super.errorDescription});
 }
 
 /// Thrown when token is expired
 class TokenExpiredException extends AppException {
-  const TokenExpiredException({String? message, String? error, String? errorDescription})
-    : super(message: message, error: error, errorDescription: errorDescription);
+  const TokenExpiredException({super.message, super.error, super.errorDescription});
 }
 
 /// Thrown when no internet or timeout
 class ConnectionException extends AppException {
-  const ConnectionException({String? message}) : super(message: message);
+  const ConnectionException({super.message});
 }
 
 /// Thrown when local database (SQLite/Hive) fails
 class DatabaseException extends AppException {
-  const DatabaseException({String? message}) : super(message: message);
+  const DatabaseException({super.message});
+}
+
+/// Thrown when local storage (Cache/SecureStorage) fails
+class CacheException extends AppException {
+  const CacheException({super.message});
 }
 
 /// Thrown when unexpected error occurs
 class UnknownException extends AppException {
-  const UnknownException({String? message}) : super(message: message);
+  const UnknownException({super.message});
 }
