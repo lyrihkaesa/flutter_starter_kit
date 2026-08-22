@@ -8,31 +8,58 @@ Flutter Starter Kit berbasis **Clean Architecture** (Presentation, Domain, Data,
 
 Pengguna **tidak perlu meng-clone repositori ini secara manual**. Cukup aktifkan perintah global `flutter_starter` sekali di terminal:
 
+### 1. Install CLI secara global (Cukup sekali dari terminal mana saja):
 ```bash
-# 1. Install CLI secara global (Cukup sekali dari terminal mana saja):
 dart pub global activate --source git https://github.com/lyrihkaesa/flutter_starter_kit.git
+```
 
-# 2. Generate project Flutter baru dari lokasi folder mana saja:
+### 2. Generate project Flutter baru dari lokasi folder mana saja:
+```bash
 flutter_starter my_awesome_app --org com.mycompany
 ```
 
 ### 📍 Opsi Tambahan:
-```bash
-# Menentukan folder output spesifik
-flutter_starter my_awesome_app --org com.mycompany --output /path/tujuan/my_awesome_app
 
-# Langsung menjalankan build_runner secara otomatis setelah generate
+#### Menentukan platform spesifik (dipisahkan koma)
+```bash
+flutter_starter my_awesome_app --org com.mycompany --platforms android,ios,web
+```
+
+#### Menentukan platform menggunakan flag individual
+```bash
+flutter_starter my_awesome_app --org com.mycompany --android --ios
+```
+
+#### Menentukan folder output spesifik
+```bash
+flutter_starter my_awesome_app --org com.mycompany --output /path/tujuan/my_awesome_app
+```
+
+#### Langsung menjalankan build_runner secara otomatis setelah generate
+```bash
 flutter_starter my_awesome_app --org com.mycompany --build-runner
 ```
 
+> **💡 Pemilihan Platform**: Jika Anda tidak menyertakan opsi platform di CLI, terminal akan menampilkan prompt interaktif (default: `android,ios`). Folder native (`android`, `ios`, `web`, dll) digenerate secara bersih menggunakan `flutter create` sesuai pilihan Anda.
+
+---
+
 ### 🚀 Langkah Selanjutnya:
+
+#### 1. Masuk ke direktori proyek baru:
 ```bash
 cd my_awesome_app
-dart run build_runner build --delete-conflicting-outputs
-flutter run
 ```
 
+#### 2. Jalankan build_runner:
+```bash
+dart run build_runner build --delete-conflicting-outputs
+```
 
+#### 3. Jalankan aplikasi Flutter:
+```bash
+flutter run
+```
 
 ---
 
@@ -55,11 +82,14 @@ mason get
 | **`local_datasource`** | Component | Men-generate Local DataSource berbasis SharedPreferences/SecureStorage |
 
 ### Contoh Penggunaan Component Brick:
+
 ```bash
 mason make bloc --name product
-mason make usecase --name get_products
 ```
 
+```bash
+mason make usecase --name get_products
+```
 
 ---
 
