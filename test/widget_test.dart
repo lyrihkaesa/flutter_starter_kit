@@ -1,30 +1,33 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
-// ignore: avoid_relative_lib_imports
-import '../lib/app.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_starter_kit/data/models/responses/user_model.dart';
+import 'package:flutter_starter_kit/domain/entities/responses/user.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('UserModel', () {
+    test('should correctly deserialize from JSON and convert to entity', () {
+      final json = {
+        'id': '1',
+        'name': 'Super Admin',
+        'email': 'superadmin@example.com',
+        'avatar_url': 'https://example.com/avatar.png',
+        'locale': 'id',
+        'timezone': 'Asia/Jakarta',
+        'theme': 'dark',
+      };
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      final model = UserModel.fromJson(json);
+      expect(model.id, equals('1'));
+      expect(model.name, equals('Super Admin'));
+      expect(model.email, equals('superadmin@example.com'));
+      expect(model.avatarUrl, equals('https://example.com/avatar.png'));
+      expect(model.locale, equals('id'));
+      expect(model.timezone, equals('Asia/Jakarta'));
+      expect(model.theme, equals('dark'));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      final entity = model.toEntity();
+      expect(entity, isA<User>());
+      expect(entity.name, equals('Super Admin'));
+    });
   });
 }
+
