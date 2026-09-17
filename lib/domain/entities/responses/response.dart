@@ -4,6 +4,9 @@ class Response<T> {
   final Meta? meta;
 
   Response({this.message, this.data, this.meta});
+
+  /// Menandakan apakah response memiliki metadata pagination
+  bool get isPaginated => meta != null;
 }
 
 class Meta {
@@ -28,6 +31,13 @@ class Meta {
     this.total,
     this.message,
   });
+
+  /// Menandakan apakah masih ada halaman selanjutnya
+  bool get hasNextPage =>
+      currentPage != null && lastPage != null && currentPage! < lastPage!;
+
+  /// Menandakan apakah masih ada halaman sebelumnya
+  bool get hasPreviousPage => currentPage != null && currentPage! > 1;
 }
 
 class MetaLink {

@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../core/errors/exception.dart';
 import '../../core/errors/failure.dart';
+import '../../core/utils/error_handler.dart';
 import '../../domain/entities/responses/user.dart';
-
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/local/auth_local_datasource.dart';
 import '../datasources/remote/auth_remote_datasource.dart';
@@ -22,7 +22,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
     String? deviceName,
   }) async {
-    try {
+    return safeRepositoryCall(() async {
       final authResponse = await _remoteDataSource.login(
         email: email,
         password: password,
@@ -35,22 +35,12 @@ class AuthRepositoryImpl implements AuthRepository {
       }
 
       if (authResponse.data?.user != null) {
-        return Right(authResponse.data!.user!.toEntity());
+        return authResponse.data!.user!.toEntity();
       }
 
       final userModel = await _remoteDataSource.getMe();
-      return Right(userModel.toEntity());
-    } on ValidationException catch (e) {
-      return Left(Failure.validation(e.errors, message: e.message));
-    } on UnauthorizedException catch (e) {
-      return Left(Failure.unauthorized(message: e.message));
-    } on ConnectionException catch (e) {
-      return Left(Failure.connection(message: e.message));
-    } on ServerException catch (e) {
-      return Left(Failure.server(message: e.message));
-    } catch (e) {
-      return Left(Failure.unknown(message: e.toString()));
-    }
+      return userModel.toEntity();
+    });
   }
 
   @override
@@ -61,7 +51,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String passwordConfirmation,
     String? deviceName,
   }) async {
-    try {
+    return safeRepositoryCall(() async {
       final authResponse = await _remoteDataSource.register(
         name: name,
         email: email,
@@ -76,38 +66,20 @@ class AuthRepositoryImpl implements AuthRepository {
       }
 
       if (authResponse.data?.user != null) {
-        return Right(authResponse.data!.user!.toEntity());
+        return authResponse.data!.user!.toEntity();
       }
 
       final userModel = await _remoteDataSource.getMe();
-      return Right(userModel.toEntity());
-    } on ValidationException catch (e) {
-      return Left(Failure.validation(e.errors, message: e.message));
-    } on UnauthorizedException catch (e) {
-      return Left(Failure.unauthorized(message: e.message));
-    } on ConnectionException catch (e) {
-      return Left(Failure.connection(message: e.message));
-    } on ServerException catch (e) {
-      return Left(Failure.server(message: e.message));
-    } catch (e) {
-      return Left(Failure.unknown(message: e.toString()));
-    }
+      return userModel.toEntity();
+    });
   }
 
   @override
   Future<Either<Failure, User>> getMe() async {
-    try {
+    return safeRepositoryCall(() async {
       final userModel = await _remoteDataSource.getMe();
-      return Right(userModel.toEntity());
-    } on UnauthorizedException catch (e) {
-      return Left(Failure.unauthorized(message: e.message));
-    } on ConnectionException catch (e) {
-      return Left(Failure.connection(message: e.message));
-    } on ServerException catch (e) {
-      return Left(Failure.server(message: e.message));
-    } catch (e) {
-      return Left(Failure.unknown(message: e.toString()));
-    }
+      return userModel.toEntity();
+    });
   }
 
   @override
@@ -128,13 +100,8 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, String?>> getSavedToken() async {
-    try {
-      final token = await _localDataSource.getToken();
-      return Right(token);
-    } on CacheException catch (e) {
-      return Left(Failure.cache(message: e.message));
-    } catch (e) {
-      return Left(Failure.unknown(message: e.toString()));
-    }
+    return safeRepositoryCall(() async {
+      return await _localDataSource.getToken();
+    });
   }
 }

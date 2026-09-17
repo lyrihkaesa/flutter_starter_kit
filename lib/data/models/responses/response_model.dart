@@ -1,6 +1,5 @@
 import '../../../domain/entities/responses/response.dart';
 
-
 class ResponseModel<T> {
   final String? message;
   final T? data;
@@ -9,29 +8,63 @@ class ResponseModel<T> {
   final String? error; // misal: "invalid_token"
   final String? errorDescription; // misal: "Token expired"
 
-  ResponseModel({this.message, this.data, this.meta, this.errors, this.error, this.errorDescription});
+  ResponseModel({
+    this.message,
+    this.data,
+    this.meta,
+    this.errors,
+    this.error,
+    this.errorDescription,
+  });
 
-  // Note: Entity tidak ada field [errors, error, errorDescription] karena sudah ditangani oleh Failure
-  Response<T> toEntity() {
-    return Response<T>(message: message, data: data, meta: meta?.toEntity());
+  /// Menandakan apakah response memiliki metadata pagination
+  bool get isPaginated => meta != null;
+
+  /// Mengonversi ke Entity domain [Response<R>].
+  ///
+  /// Jika tipe entity berbeda dari tipe model (misalnya [UserModel] ke [User]),
+  /// berikan fungsi [dataMapper] untuk mentransformasikan data.
+  Response<R> toEntity<R>([R Function(T data)? dataMapper]) {
+    final R? mappedData = data != null
+        ? (dataMapper != null ? dataMapper(data as T) : data as R?)
+        : null;
+
+    return Response<R>(
+      message: message,
+      data: mappedData,
+      meta: meta?.toEntity(),
+    );
   }
 
-  factory ResponseModel.fromEntity(Response<T> response) {
+  factory ResponseModel.fromEntity(
+    Response<T> response, [
+    T Function(T entity)? entityMapper,
+  ]) {
     return ResponseModel<T>(
       message: response.message,
-      data: response.data,
+      data: response.data != null && entityMapper != null
+          ? entityMapper(response.data as T)
+          : response.data,
       meta: response.meta != null ? MetaModel.fromEntity(response.meta!) : null,
     );
   }
 
-  factory ResponseModel.fromJson(Map<String, dynamic> json, T Function(Object? json)? fromJsonT) {
+  factory ResponseModel.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object? json)? fromJsonT,
+  ) {
     return ResponseModel<T>(
       message: json['message'] as String?,
-      data: json.containsKey('data') && fromJsonT != null ? fromJsonT(json['data']) : null,
+      data: json.containsKey('data') && fromJsonT != null
+          ? fromJsonT(json['data'])
+          : json['data'] as T?,
       meta: json['meta'] != null ? MetaModel.fromJson(json['meta']) : null,
       errors: json['errors'] != null
           ? (json['errors'] as Map<String, dynamic>).map(
-              (key, value) => MapEntry(key, List<String>.from(value as List<dynamic>)),
+              (key, value) => MapEntry(
+                key,
+                (value as List<dynamic>).map((e) => e.toString()).toList(),
+              ),
             )
           : null,
       error: json['error'] as String?,
@@ -125,6 +158,10 @@ class MetaLinkModel {
   }
 
   factory MetaLinkModel.fromJson(Map<String, dynamic> json) {
-    return MetaLinkModel(url: json['url'] as String?, label: json['label'] as String?, active: json['active'] as bool?);
+    return MetaLinkModel(
+      url: json['url'] as String?,
+      label: json['label'] as String?,
+      active: json['active'] as bool?,
+    );
   }
 }
